@@ -1,37 +1,23 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-	"strconv"
+	. "fmt"
 )
 
-var sc *bufio.Scanner
-
-func init() {
-	sc = bufio.NewScanner(os.Stdin)
-	sc.Split(bufio.ScanWords)
-}
-
-func scanInt() int {
-	sc.Scan()
-	n, _ := strconv.Atoi(sc.Text())
-	return n
-}
-
 func main() {
-	n := scanInt()
-	min := 10000000
+	var a int
+	Scan(&a)
+	min := 1000001
 	max := 0
-	for i := 0; i < n; i++ {
-		a := scanInt()
-		if min > a {
-			min = a
+	for i := a; i > 0; i-- {
+		var b int
+		Scan(&b)
+		if min > b {
+			min = b
 		}
-		if max < a {
-			max = a
+		if max < b {
+			max = b
 		}
 	}
-	fmt.Printf("%d\n", min*max)
+	Println(min * max)
 }
