@@ -2,3 +2,4 @@
 01094,for문
 01037,if문/최대 최소 지정할때 두번째 if문도 else if가 아닌 if
 11721,a[b:c]의 출력범위:b<=print<c
+13234,문자열 검색:strings.Contains/Scan 등을 통해 바로 true/false를 boolen 형태로 넣을 수 있음.
