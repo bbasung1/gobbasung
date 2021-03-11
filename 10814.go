@@ -7,29 +7,25 @@ import (
 	"sort"
 )
 
+type mb struct {
+	o int
+	p string
+}
+
 func main() {
 	r := bufio.NewReader(os.Stdin)
+	bw := bufio.NewWriter(os.Stdout)
 	var a int
 	fmt.Fscan(r, &a)
-	b := make(map[string]int)
-	for i := a; i > 0; i-- {
-		var d string
-		var e int
-		fmt.Fscan(r, &e, &d)
-		b[d] = e
+	b := make([]mb, a)
+	for i := 0; i < a; i++ {
+		fmt.Fscan(r, &b[i].o, &b[i].p)
 	}
-	type kv struct {
-		key string
-		val int
-	}
-	var ss []kv
-	for k, v := range b {
-		ss = append(ss, kv{k, v})
-	}
-	sort.Slice(ss, func(i, j int) bool {
-		return ss[i].val < ss[j].val
+	sort.SliceStable(b, func(i, j int) bool {
+		return b[i].o < b[j].o
 	})
-	for _, kv := range ss {
-		fmt.Println(kv.val, kv.key)
+	for i := 0; i < a; i++ {
+		fmt.Fprintln(bw, b[i].o, b[i].p)
 	}
+	bw.Flush()
 }
