@@ -7,26 +7,28 @@ import (
 	"sort"
 )
 
+type loc struct {
+	x, y int
+}
+
 func main() {
 	r := bufio.NewReader(os.Stdin)
 	w := bufio.NewWriter(os.Stdout)
 	var a int
 	fmt.Fscan(r, &a)
-	var c [][]int
-	for i := a; i > 0; i-- {
-		b := []int{0, 0}
-		fmt.Fscan(r, &b[0], &b[1])
-		c = append(c, b)
+	c := make([]loc, a)
+	for i := 0; i < a; i++ {
+		fmt.Fscan(r, &c[i].x, &c[i].y)
 	}
-	sort.SliceStable(c, func(i, j int) bool {
-		if c[i][1] == c[j][1] {
-			return c[i][0] < c[j][0]
+	sort.Slice(c, func(i, j int) bool {
+		if c[i].y == c[j].y {
+			return c[i].x < c[j].x
 		} else {
-			return c[i][1] < c[j][1]
+			return c[i].y < c[j].y
 		}
 	})
 	for _, val := range c {
-		fmt.Fprintln(w, val[0], val[1])
+		fmt.Fprintln(w, val.x, val.y)
 	}
 	w.Flush()
 }
